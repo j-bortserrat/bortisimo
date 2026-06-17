@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bortísimo · Comiendo como en casa</title>
+<meta name="description" content="Bortísimo — Comiendo como en casa. Restaurante en C/ Reina Doña Germana 16, 8. Desayunos, comidas y cenas con producto de verdad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --granate:#9d3b46;
+    --granate-claro:#b9505c;
+    --granate-suave:#c97a83;
+    --crema:#fbf4ec;
+    --crema-2:#f5e9dc;
+    --tinta:#3a2429;
+    --tinta-suave:#6e5358;
+    --dorado:#c89b5a;
+    --sombra:rgba(157,59,70,.18);
+    --max:1200px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Nunito Sans',system-ui,sans-serif;
+    color:var(--tinta);
+    background:var(--crema);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,.serif{font-family:'Playfair Display',Georgia,serif}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:11px}
+  ::-webkit-scrollbar-track{background:var(--crema-2)}
+  ::-webkit-scrollbar-thumb{background:var(--granate-suave);border-radius:10px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--granate)}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,5vw,48px);
+    transition:background .4s ease,padding .4s ease,box-shadow .4s ease;
+  }
+  nav.scrolled{
+    background:rgba(251,244,236,.82);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:0 4px 24px rgba(58,36,41,.08);
+    padding:12px clamp(20px,5vw,48px);
+  }
+  .nav-brand{display:flex;align-items:center;gap:12px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;color:var(--granate);letter-spacing:.5px}
+  .nav-brand .brand-logo{
+    width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 30%;
+    border:2px solid var(--granate-claro);box-shadow:0 4px 14px var(--sombra);background:var(--crema);
+  }
+  nav:not(.scrolled) .nav-brand{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  nav:not(.scrolled) .nav-brand .brand-logo{border-color:#fff}
+  .nav-brand .brand-text{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45)}
+  nav.scrolled .nav-brand .brand-text{color:var(--granate);text-shadow:none}
+  .nav-brand .brand-text span{color:var(--dorado)}
+  .nav-links{display:flex;gap:30px;list-style:none}
+  .nav-links a{font-size:.86rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--tinta);position:relative;transition:color .3s}
+  nav:not(.scrolled) .nav-links a{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--granate-claro);transition:width .3s}
+  .nav-links a:hover::after{width:100%}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer}
+  .nav-toggle span{width:26px;height:2px;background:#fff;transition:.3s}
+  nav.scrolled .nav-toggle span{background:var(--tinta)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:120px 20px 80px;overflow:hidden;
+    background:
+      radial-gradient(circle at 70% 20%,rgba(201,122,131,.25),transparent 55%),
+      linear-gradient(135deg,#7c2b35 0%,#9d3b46 45%,#b9505c 100%);
+  }
+  .hero-video{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    background:linear-gradient(135deg,#7c2b35 0%,#9d3b46 45%,#b9505c 100%);
+  }
+  .hero-overlay{
+    position:absolute;inset:0;z-index:1;
+    background:
+      radial-gradient(circle at 70% 25%,rgba(124,43,53,.35),transparent 60%),
+      linear-gradient(135deg,rgba(124,43,53,.78) 0%,rgba(157,59,70,.66) 45%,rgba(185,80,92,.6) 100%);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
+    background-size:22px 22px;opacity:.6;
+  }
+  .hero-deco{position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;pointer-events:none}
+  .hero-deco.d1{width:340px;height:340px;top:-120px;left:-100px;background:radial-gradient(circle,var(--granate-suave),transparent 70%)}
+  .hero-deco.d2{width:420px;height:420px;bottom:-160px;right:-120px;background:radial-gradient(circle,var(--dorado),transparent 70%);opacity:.28}
+  .hero-inner{position:relative;z-index:2;max-width:860px}
+  .hero .eyebrow{
+    display:inline-block;color:#f6dfc4;font-weight:700;letter-spacing:5px;text-transform:uppercase;
+    font-size:.8rem;margin-bottom:26px;border:1px solid rgba(246,223,196,.4);padding:8px 20px;border-radius:40px;
+  }
+  .hero h1{
+    color:#fff;font-weight:800;line-height:1.02;
+    font-size:clamp(3.4rem,11vw,8rem);
+    text-shadow:0 8px 40px rgba(0,0,0,.3);
+  }
+  .hero h1 em{font-style:italic;color:#f3c98a}
+  .hero .slogan{
+    color:#fceede;font-size:clamp(1.2rem,3vw,1.7rem);font-style:italic;font-family:'Playfair Display',serif;
+    margin-top:18px;margin-bottom:42px;
+  }
+  .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:15px 34px;border-radius:50px;font-weight:800;
+    font-size:.86rem;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:.3s;border:2px solid transparent;
+  }
+  .btn-primary{background:#fff;color:var(--granate)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,.25)}
+  .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
+  .btn-ghost:hover{background:#fff;color:var(--granate);transform:translateY(-3px)}
+  .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;color:#fceede;font-size:.75rem;letter-spacing:2px;text-transform:uppercase}
+  .scroll-hint .mouse{width:24px;height:38px;border:2px solid #fceede;border-radius:14px;margin:0 auto 10px;position:relative}
+  .scroll-hint .mouse::after{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:4px;height:7px;background:#fceede;border-radius:3px;animation:wheel 1.5s infinite}
+  @keyframes wheel{0%{opacity:1;top:7px}100%{opacity:0;top:18px}}
+
+  /* ---------- SECTIONS ---------- */
+  section{position:relative}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+  .block{padding:clamp(70px,10vw,130px) 0}
+  .section-head{text-align:center;max-width:720px;margin:0 auto clamp(40px,6vw,70px)}
+  .section-head .kicker{
+    display:inline-block;color:var(--granate-claro);font-weight:800;letter-spacing:3px;
+    text-transform:uppercase;font-size:.78rem;margin-bottom:14px;
+  }
+  .section-head .kicker::before,.section-head .kicker::after{content:"·";margin:0 8px;color:var(--dorado)}
+  .section-head h2{font-size:clamp(2.2rem,5.5vw,3.6rem);color:var(--granate);font-weight:700;line-height:1.1}
+  .section-head p{color:var(--tinta-suave);font-size:1.05rem;margin-top:16px}
+
+  /* ---------- HISTORIA ---------- */
+  .historia{background:var(--crema-2)}
+  .historia-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:center}
+  .historia-foto{position:relative}
+  .historia-foto img{width:100%;border-radius:18px;box-shadow:0 30px 60px var(--sombra);position:relative;z-index:2}
+  .historia-foto .hover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:18px;opacity:0;transition:opacity .45s ease;z-index:2;box-shadow:none}
+  .historia-foto:hover .hover-img{opacity:1}
+  .historia-foto::after{content:"";position:absolute;inset:18px -18px -18px 18px;border:2px solid var(--granate-suave);border-radius:18px;z-index:1}
+  .historia-foto .cap{
+    position:absolute;bottom:18px;left:18px;z-index:3;background:rgba(157,59,70,.92);color:#fff;
+    padding:10px 18px;border-radius:12px;font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;
+    transition:opacity .45s ease;
+  }
+  .historia-foto .cap-hover{opacity:0}
+  .historia-foto:hover .cap-default{opacity:0}
+  .historia-foto:hover .cap-hover{opacity:1}
+  .historia-txt h2{font-size:clamp(2rem,4.5vw,3rem);color:var(--granate);margin-bottom:22px;line-height:1.1}
+  .historia-txt p{color:var(--tinta-suave);font-size:1.12rem;margin-bottom:18px}
+  .historia-txt .firma{font-family:'Playfair Display',serif;font-style:italic;color:var(--granate);font-size:1.3rem;margin-top:6px}
+
+  /* ---------- CARTA: filas horizontales ---------- */
+  .carta-row{
+    display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,52px);align-items:center;
+    margin-bottom:clamp(30px,4.5vw,58px);
+  }
+  .carta-row:last-child{margin-bottom:0}
+  .carta-row.flip .carta-media{order:2}
+  .carta-media{position:relative}
+  .carta-media img{width:100%;height:clamp(230px,32vw,360px);object-fit:cover;border-radius:18px;box-shadow:0 26px 54px var(--sombra)}
+  .carta-media .badge{
+    position:absolute;top:-16px;left:24px;background:var(--granate);color:#fff;font-family:'Playfair Display',serif;
+    font-weight:700;padding:10px 22px;border-radius:40px;box-shadow:0 10px 24px var(--sombra);font-size:1.05rem;
+  }
+  .carta-txt h3{font-size:clamp(1.7rem,3.5vw,2.4rem);color:var(--granate);margin-bottom:8px;line-height:1.15}
+  .carta-txt .lead{color:var(--tinta-suave);font-size:1.08rem;margin-bottom:24px}
+  .dish-list{list-style:none}
+  .dish-list li{
+    padding:11px 0;border-bottom:1px dashed rgba(157,59,70,.25);display:flex;gap:10px;align-items:baseline;
+    font-size:1.02rem;
+  }
+  .dish-list li:last-child{border-bottom:0}
+  .dish-list li::before{content:"◆";color:var(--dorado);font-size:.7rem;flex-shrink:0;transform:translateY(-2px)}
+  .dish-list b{font-weight:700;color:var(--tinta)}
+  .dish-list li.agotado{opacity:.9}
+  .dish-list li.agotado s{color:var(--tinta-suave)}
+  .dish-list li .tag-out{display:inline-block;margin-left:8px;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:var(--granate-claro);padding:3px 10px;border-radius:30px;white-space:nowrap}
+
+  /* tarjetas de opciones (desayuno) */
+  .opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin-top:30px}
+  .opt-card{
+    background:#fff;border-radius:16px;padding:24px;box-shadow:0 14px 34px var(--sombra);
+    border:1px solid rgba(157,59,70,.08);transition:transform .35s,box-shadow .35s;
+  }
+  .opt-card:hover{transform:translateY(-8px);box-shadow:0 26px 50px var(--sombra)}
+  .opt-card h4{color:var(--granate);font-size:1.2rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .opt-card .ico{font-size:1.3rem}
+  .opt-card p{color:var(--tinta-suave);font-size:.98rem}
+
+  .divider{height:2px;width:90px;background:linear-gradient(90deg,var(--dorado),var(--granate-suave));margin:0 auto;border-radius:2px}
+
+  /* Selector de carta (pestañas) */
+  .carta-tabs{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+  .tab-btn{
+    font-family:'Nunito Sans',sans-serif;font-weight:800;font-size:.92rem;letter-spacing:1px;text-transform:uppercase;
+    padding:14px 32px;border-radius:50px;border:2px solid var(--granate-suave);background:transparent;color:var(--granate);
+    cursor:pointer;transition:.3s;
+  }
+  .tab-btn:hover{background:var(--granate-suave);color:#fff;transform:translateY(-2px)}
+  .tab-btn.active{background:var(--granate);border-color:var(--granate);color:#fff;box-shadow:0 10px 24px var(--sombra)}
+  .carta-panel{display:none}
+  .carta-panel.active{display:block;animation:panelIn .5s ease}
+  @keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* Clásicos del desayuno (tarjetas juntas) */
+  .clasicos-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,34px)}
+  .clasico-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 20px 44px var(--sombra);transition:transform .35s,box-shadow .35s}
+  .clasico-card:hover{transform:translateY(-8px);box-shadow:0 30px 56px var(--sombra)}
+  .clasico-card img{width:100%;height:clamp(200px,26vw,290px);object-fit:cover}
+  .clasico-card .cc-body{padding:24px clamp(20px,2.5vw,28px) 28px}
+  .clasico-card .cc-body h3{color:var(--granate);font-size:clamp(1.35rem,2.8vw,1.85rem);margin-bottom:10px;line-height:1.15}
+  .clasico-card .cc-body p{color:var(--tinta-suave);font-size:1.02rem}
+
+  /* Tarjetas de carta (foto arriba, nombre debajo) en tira con scroll horizontal */
+  .menu-grid{display:flex;justify-content:safe center;gap:clamp(14px,1.8vw,22px);overflow-x:auto;scroll-snap-type:x proximity;padding:4px 2px 20px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--granate-suave) transparent}
+  .menu-grid::-webkit-scrollbar{height:8px}
+  .menu-grid::-webkit-scrollbar-thumb{background:var(--granate-suave);border-radius:10px}
+  .menu-grid::-webkit-scrollbar-track{background:rgba(157,59,70,.08);border-radius:10px}
+  .menu-grid.cols-1{justify-content:center}
+  .menu-grid.cols-1 .menu-card{flex:0 0 min(880px,100%);flex-direction:row}
+  .menu-grid.cols-1 .menu-card .mc-media{flex:0 0 40%}
+  .menu-grid.cols-1 .menu-card .mc-media img{height:100%;min-height:260px}
+  .menu-grid.cols-1 .menu-card .mc-body{justify-content:center;padding:24px clamp(20px,2.5vw,30px)}
+  @media(max-width:560px){
+    .menu-grid.cols-1 .menu-card{flex-direction:column}
+    .menu-grid.cols-1 .menu-card .mc-media{flex:0 0 auto}
+    .menu-grid.cols-1 .menu-card .mc-media img{height:clamp(160px,40vw,200px);min-height:0}
+  }
+  .menu-card{flex:0 0 clamp(210px,23vw,250px);scroll-snap-align:start;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 16px 34px var(--sombra);transition:transform .35s,box-shadow .35s;display:flex;flex-direction:column}
+  .menu-card:hover{transform:translateY(-7px);box-shadow:0 26px 50px var(--sombra)}
+  .menu-card .mc-media{position:relative;overflow:hidden}
+  .menu-card .mc-media img{width:100%;height:clamp(160px,18vw,200px);object-fit:cover;object-position:center;transition:transform .5s;display:block}
+  .menu-card:hover .mc-media img{transform:scale(1.05)}
+  .menu-card .mc-media .badge{position:absolute;top:12px;left:12px;font-size:.76rem;padding:7px 14px;box-shadow:0 8px 18px rgba(58,36,41,.25)}
+  .menu-card .mc-media .fav-star{position:absolute;top:10px;right:10px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--dorado);display:grid;place-items:center;font-size:1rem;box-shadow:0 4px 12px rgba(58,36,41,.28)}
+  /* recuadro en blanco para fotos pendientes */
+  .menu-card .mc-media.placeholder{height:clamp(160px,18vw,200px);background:#fff;border-bottom:1px dashed rgba(157,59,70,.25);display:grid;place-items:center}
+  .menu-card .mc-media.placeholder::after{content:"Foto próximamente";font-family:'Nunito Sans',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--granate-suave);opacity:.75}
+  .menu-card .mc-body{padding:15px clamp(15px,1.8vw,20px) 19px;flex:1;display:flex;flex-direction:column}
+  .menu-card .mc-body h3,.menu-card .mc-body h4{font-family:'Playfair Display',serif;color:var(--granate);line-height:1.18;margin-bottom:6px}
+  .menu-card .mc-body h4{font-size:1.12rem}
+  .menu-card .mc-body h3{font-size:clamp(1.2rem,2.2vw,1.5rem);margin-bottom:12px}
+  .menu-card .mc-body p{color:var(--tinta-suave);font-size:.9rem;line-height:1.5}
+  .menu-card .mc-body .tag-out{display:inline-block;margin-top:8px;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#fff;background:var(--granate-claro);padding:4px 11px;border-radius:30px}
+  .menu-card .mc-body h4 s{color:var(--tinta-suave)}
+  .menu-card .dish-list li{font-size:.96rem;padding:8px 0}
+  .menu-card .chip-wrap{margin-top:6px;gap:9px}
+  .menu-card .chip{font-size:.86rem;padding:8px 14px}
+  /* Mini galería deslizable dentro de una tarjeta */
+  .menu-card .mc-media.gallery{height:clamp(160px,18vw,200px)}
+  .menu-card .mc-media.gallery .g-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s;display:block}
+  .menu-card .mc-media.gallery .g-img.active{opacity:1}
+  .menu-card .g-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:30px;height:30px;border-radius:50%;border:0;background:rgba(157,59,70,.82);color:#fff;font-size:1.2rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s;padding:0}
+  .menu-card .g-arrow:hover{background:var(--granate);transform:translateY(-50%) scale(1.1)}
+  .menu-card .g-prev{left:8px}
+  .menu-card .g-next{right:8px}
+  .menu-card .g-dots{position:absolute;bottom:9px;left:0;right:0;display:flex;justify-content:center;gap:6px;z-index:3}
+  .menu-card .g-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:background .2s;border:1px solid rgba(0,0,0,.15)}
+  .menu-card .g-dot.active{background:#fff}
+
+  /* Encabezado de subcategoría */
+  .subcat{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,24px);margin:clamp(30px,5vw,56px) 0 clamp(20px,3vw,32px)}
+  .subcat:first-of-type{margin-top:0}
+  .subcat::before,.subcat::after{content:"";height:1.5px;flex:1;max-width:120px;background:var(--granate-suave);opacity:.55}
+  .subcat h3{font-family:'Playfair Display',serif;color:var(--granate);font-size:clamp(1.5rem,4vw,2.3rem);font-weight:700;white-space:nowrap;text-align:center}
+  .subcat .scico{font-size:.9em;margin-right:6px}
+
+  /* ---------- ACOMPAÑAMIENTOS ---------- */
+  .acomp{background:var(--crema-2)}
+  .acomp-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(28px,5vw,64px);align-items:center}
+  .acomp-media img{width:100%;height:clamp(280px,40vw,420px);object-fit:cover;border-radius:18px;box-shadow:0 26px 54px var(--sombra)}
+  .chip-wrap{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+  .chip{
+    background:#fff;border:1.5px solid var(--granate-suave);color:var(--granate);
+    padding:12px 22px;border-radius:50px;font-weight:700;font-size:1rem;
+    box-shadow:0 8px 20px var(--sombra);transition:.3s;
+  }
+  .chip:hover{background:var(--granate);color:#fff;transform:translateY(-4px)}
+
+  /* ---------- RESEÑAS ---------- */
+  .resenas{background:linear-gradient(160deg,#9d3b46,#7c2b35);color:#fff;overflow:hidden}
+  .resenas .section-head h2{color:#fff}
+  .resenas .section-head .kicker{color:#f3c98a}
+  .resenas .section-head .kicker::before,.resenas .section-head .kicker::after{color:#f3c98a}
+  .resenas .section-head p{color:#fbe6d4}
+  .resena-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+  .resena{
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:30px;
+    backdrop-filter:blur(4px);transition:transform .35s,background .35s;
+  }
+  .resena:hover{transform:translateY(-8px);background:rgba(255,255,255,.12)}
+  .resena .stars{color:#f3c98a;font-size:1rem;letter-spacing:3px;margin-bottom:14px}
+  .resena p{font-size:1.05rem;font-style:italic;line-height:1.6;margin-bottom:20px;color:#fdeede}
+  .resena .who{display:flex;align-items:center;gap:12px}
+  .resena .avatar{width:46px;height:46px;border-radius:50%;background:#fff;color:var(--granate);display:grid;place-items:center;font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;flex-shrink:0}
+  .resena .who b{font-weight:800;display:block}
+  .resena .who small{color:#f3c98a;font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+
+  /* ---------- CONTACTO ---------- */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,70px);align-items:center}
+  .info-card{display:flex;gap:18px;align-items:flex-start;margin-bottom:26px}
+  .info-card .ic{width:54px;height:54px;border-radius:14px;background:var(--granate);color:#fff;display:grid;place-items:center;font-size:1.4rem;flex-shrink:0;box-shadow:0 10px 24px var(--sombra)}
+  .info-card h4{font-family:'Nunito Sans',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:.8rem;color:var(--granate-claro);margin-bottom:4px}
+  .info-card p{color:var(--tinta);font-size:1.12rem}
+  .info-card .ph{color:var(--tinta-suave);font-style:italic}
+  .map-box{border-radius:18px;overflow:hidden;box-shadow:0 26px 54px var(--sombra);min-height:340px;border:6px solid #fff}
+  .map-box iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#5c1f27;color:#f3d9cd;text-align:center;padding:60px 20px 36px}
+  footer .f-brand{font-family:'Playfair Display',serif;font-weight:800;font-size:2rem;color:#fff;margin-bottom:8px}
+  footer .f-brand span{color:var(--dorado)}
+  footer .f-slogan{font-style:italic;font-family:'Playfair Display',serif;color:#f3c98a;margin-bottom:24px}
+  footer .f-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+  footer .f-links a{font-size:.85rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;transition:color .3s}
+  footer .f-links a:hover{color:#fff}
+  footer .copy{font-size:.82rem;color:#c79a8d;border-top:1px solid rgba(255,255,255,.12);padding-top:24px;max-width:600px;margin:0 auto}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.left{transform:translateX(-50px)}
+  .reveal.right{transform:translateX(50px)}
+  .reveal.left.in,.reveal.right.in{transform:none}
+  [data-delay="1"]{transition-delay:.1s}
+  [data-delay="2"]{transition-delay:.2s}
+  [data-delay="3"]{transition-delay:.3s}
+  [data-delay="4"]{transition-delay:.4s}
+
+  /* Botón de música de fondo */
+  .music-btn{
+    position:fixed;bottom:22px;right:22px;z-index:200;width:54px;height:54px;border-radius:50%;
+    border:0;background:var(--granate);color:#fff;font-size:1.35rem;cursor:pointer;
+    box-shadow:0 8px 24px rgba(58,36,41,.4);display:grid;place-items:center;transition:transform .3s,background .3s;
+  }
+  .music-btn:hover{transform:scale(1.1);background:var(--granate-claro)}
+  .music-btn.playing{animation:musicPulse 2s ease-in-out infinite}
+  @keyframes musicPulse{0%,100%{box-shadow:0 8px 24px rgba(157,59,70,.4)}50%{box-shadow:0 8px 34px rgba(201,122,131,.75)}}
+
+  /* Botón + para seleccionar plato (comanda) */
+  .menu-card{position:relative}
+  .menu-card .add-btn{
+    align-self:flex-end;margin-top:12px;width:34px;height:34px;border-radius:50%;border:2px solid var(--granate-suave);
+    background:#fff;color:var(--granate);font-size:1.2rem;font-weight:800;cursor:pointer;line-height:1;
+    display:grid;place-items:center;transition:.25s;flex-shrink:0;
+  }
+  .menu-card .add-btn:hover{background:var(--granate-suave);color:#fff;transform:scale(1.1)}
+  .menu-card.selected{outline:3px solid var(--granate);outline-offset:-3px}
+  .menu-card.selected .add-btn{background:var(--granate);color:#fff;border-color:var(--granate)}
+
+  /* Botón flotante de WhatsApp */
+  .wa-btn{position:fixed;right:22px;bottom:88px;z-index:200;width:56px;height:56px;border-radius:50%;border:0;background:#25D366;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3);display:grid;place-items:center;transition:transform .3s}
+  .wa-btn:hover{transform:scale(1.1)}
+  .wa-btn svg{width:32px;height:32px;fill:#fff}
+  .wa-count{position:absolute;top:-5px;right:-5px;background:var(--granate);color:#fff;font-size:.72rem;font-weight:800;min-width:21px;height:21px;border-radius:11px;display:none;place-items:center;padding:0 5px;font-family:'Nunito Sans',sans-serif;border:2px solid #fff}
+
+  /* Panel de comanda */
+  .order-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:299;opacity:0;visibility:hidden;transition:.3s}
+  .order-overlay.open{opacity:1;visibility:visible}
+  .order-panel{position:fixed;top:0;right:-420px;width:360px;max-width:90vw;height:100%;background:var(--crema);z-index:300;box-shadow:-12px 0 40px rgba(0,0,0,.28);transition:right .4s ease;display:flex;flex-direction:column;padding:26px 24px}
+  .order-panel.open{right:0}
+  .op-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .op-head h3{font-family:'Playfair Display',serif;color:var(--granate);font-size:1.7rem}
+  .op-close{background:none;border:0;font-size:1.9rem;line-height:1;color:var(--granate);cursor:pointer}
+  .op-sub{color:var(--tinta-suave);font-size:.92rem;margin-bottom:14px}
+  .op-items{flex:1;overflow-y:auto;margin-bottom:14px}
+  .op-empty{color:var(--tinta-suave);font-style:italic;text-align:center;margin-top:30px}
+  .op-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:8px;box-shadow:0 4px 12px var(--sombra)}
+  .op-item span{font-weight:600;font-size:.96rem}
+  .op-rm{background:none;border:0;color:var(--granate-claro);font-size:1.3rem;line-height:1;cursor:pointer;flex-shrink:0}
+  .op-fields{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+  .op-fields label{display:flex;flex-direction:column;gap:5px;font-weight:700;font-size:.85rem;color:var(--granate);text-transform:uppercase;letter-spacing:.5px}
+  .op-fields input{padding:11px 14px;border:1.5px solid var(--granate-suave);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:1rem;background:#fff;color:var(--tinta)}
+  .op-send{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;border:0;border-radius:50px;padding:15px;font-weight:800;font-size:1rem;cursor:pointer;transition:.25s;box-shadow:0 10px 24px rgba(37,211,102,.35)}
+  .op-send:hover{background:#1ebe5a;transform:translateY(-2px)}
+  .op-send svg{width:22px;height:22px;fill:#fff}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .nav-links{
+      position:fixed;top:0;right:-100%;height:100vh;width:74%;max-width:320px;
+      background:var(--granate);flex-direction:column;justify-content:center;align-items:center;gap:34px;
+      transition:right .4s ease;box-shadow:-10px 0 40px rgba(0,0,0,.3);
+    }
+    .nav-links.open{right:0}
+    .nav-links a{color:#fff !important;text-shadow:none;font-size:1.05rem}
+    .nav-toggle{display:flex;z-index:110}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:#fff}
+    .nav-toggle.open span:nth-child(2){opacity:0}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:#fff}
+    .historia-grid,.carta-row,.carta-row.flip .carta-media,.acomp-grid,.contacto-grid,.clasicos-grid{grid-template-columns:1fr}
+    .carta-row.flip .carta-media{order:0}
+    .historia-foto{order:-1}
+    .historia-foto::after{display:none}
+    .reveal.left,.reveal.right{transform:translateY(40px)}
+  }
+
+  /* ---------- MÓVIL ---------- */
+  @media(max-width:600px){
+    .block{padding:56px 0}
+    .nav-brand{font-size:1.25rem}
+    .nav-brand .brand-logo{width:38px;height:38px}
+    .hero{min-height:90vh}
+    .hero h1{font-size:clamp(3rem,17vw,5rem)}
+    .hero .slogan{font-size:1.15rem}
+    .section-head{margin-bottom:32px}
+    .section-head h2{font-size:clamp(1.9rem,8vw,2.6rem)}
+    /* tarjetas: una visible con un pequeño adelanto de la siguiente */
+    .menu-grid{justify-content:flex-start;gap:14px;scroll-snap-type:x mandatory}
+    .menu-card{flex:0 0 80%}
+    .menu-grid.cols-1 .menu-card{flex:0 0 100%}
+    .menu-card .mc-media img,.menu-card .mc-media.placeholder{height:200px}
+    .subcat{margin:34px 0 20px}
+    .subcat h3{font-size:1.6rem}
+    .subcat::before,.subcat::after{max-width:40px}
+    /* botones flotantes algo más pequeños y separados */
+    .wa-btn{width:50px;height:50px;right:16px;bottom:78px}
+    .music-btn{width:50px;height:50px;right:16px;bottom:18px}
+    .carta-tabs{gap:10px}
+    .tab-btn{padding:12px 22px;font-size:.84rem}
+    .historia-txt h2{font-size:1.9rem}
+    .resena-grid,.opt-grid{gap:16px}
+    footer .f-links{gap:16px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand"><img class="brand-logo" src="assets/chef.jpg" alt="El chef de Casa Bort"><span class="brand-text">Bort<span>í</span>simo</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#historia">Casa Bort</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#resenas">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="inicio">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-deco d1"></div>
+  <div class="hero-deco d2"></div>
+  <div class="hero-inner">
+    <span class="eyebrow reveal">Restaurante · Cocina de casa</span>
+    <h1 class="reveal" data-delay="1">Bort<em>í</em>simo</h1>
+    <p class="slogan reveal" data-delay="2">«Comiendo como en casa»</p>
+    <div class="hero-cta reveal" data-delay="3">
+      <a href="#carta" class="btn btn-primary">Ver la carta</a>
+      <a href="#contacto" class="btn btn-ghost">Cómo llegar</a>
+    </div>
+  </div>
+  <div class="scroll-hint reveal" data-delay="4">
+    <div class="mouse"></div>
+  </div>
+</header>
+
+<!-- HISTORIA -->
+<section class="block historia" id="historia">
+  <div class="wrap historia-grid">
+    <div class="historia-foto reveal left">
+      <img src="assets/chef.jpg" alt="El chef de Casa Bort">
+      <img class="hover-img" src="assets/chef-hover.jpg" alt="La catadora: tengo hambre">
+      <span class="cap cap-default">El jefe de cocina</span>
+      <span class="cap cap-hover">La catadora</span>
+    </div>
+    <div class="historia-txt reveal right">
+      <span class="kicker" style="display:inline-block;color:var(--granate-claro);font-weight:800;letter-spacing:3px;text-transform:uppercase;font-size:.78rem;margin-bottom:14px;">Nuestra historia</span>
+      <h2>Bienvenido a Casa Bort</h2>
+      <p>Comida solo apta para los paladares más salados, los comensales más exigentes y los invitados más pacientes.</p>
+      <p>En esta casa no se sube el fuego ni se compran los picatostes. Aquí podrás probar desde un revuelto de gallinas felices hasta una paella a la desesperada. Todo ello acompañado de MasterChef —o de fútbol en ocasiones muy puntuales—, pero siempre de risas y sonrisas.</p>
+      <p>Y recuerda, en Casa Bort solo se permite estar lleno de felicidad.</p>
+      <p class="firma">— Con cariño, la catadora</p>
+    </div>
+  </div>
+</section>
+
+<!-- CARTA: selector -->
+<section class="block" id="carta" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:clamp(26px,4vw,40px)">
+      <span class="kicker">Nuestra carta</span>
+      <h2>¿Qué te apetece hoy?</h2>
+    </div>
+    <div class="carta-tabs reveal">
+      <button class="tab-btn active" data-target="desayunos">Desayunos</button>
+      <button class="tab-btn" data-target="comida-cena">Comida &amp; Cena</button>
+    </div>
+  </div>
+</section>
+
+<!-- DESAYUNOS -->
+<section class="block carta-panel active" id="desayunos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Para empezar el día</span>
+      <h2>Desayunos</h2>
+      <p>Pan de masa madre o centeno de Mòlt tostado al punto (con suerte sin incendio), huevos de gallinas felices y todo lo bueno de la nevera.</p>
+    </div>
+
+    <!-- ===== BEBIDAS ===== -->
+    <div class="subcat reveal"><h3>Bebidas</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-body"><h4>Café expreso</h4><p>Recién hecho, intenso como tú.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-body"><h4>Té matcha</h4><p>Con leche de avena espumada por el chef.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== TOSTADAS ===== -->
+    <div class="subcat reveal"><h3>Tostadas</h3></div>
+    <div class="menu-grid cols-1 reveal">
+      <div class="menu-card">
+        <div class="mc-media"><span class="badge">A tu gusto</span><img src="assets/tostada-aguacate.jpg" alt="Tostada de aguacate con huevo y parmesano"></div>
+        <div class="mc-body">
+          <h3>Tostadas a montar</h3>
+          <ul class="dish-list">
+            <li><b>La base:</b> tomate rayado o aguacate</li>
+            <li><b>El huevo:</b> revuelto, a la plancha o duro — de gallinas felices</li>
+            <li><b>Toppings:</b> jamón cocido, serrano, miel, queso fresco, cualquier queso de la nevera…</li>
+            <li><b>El toque de la casa:</b> especias, sal Maldon y aceite de Lola</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CLÁSICOS ===== -->
+    <div class="subcat reveal"><h3>Clásicos</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tostada-tortilla.jpg" alt="Pincho de tortilla"></div>
+        <div class="mc-body"><h4>Pincho de tortilla</h4><p>Si la noche anterior sobró tortilla: tortilla española jugosa con cebolla sobre pan tostado.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tosta-completa.jpg" alt="Tosta de tomate, aguacate, queso y jamón"></div>
+        <div class="mc-body"><h4>La combinación perfecta del chef</h4><p>Tomate, aguacate, queso y jamón.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tostada-huevo.jpg" alt="Tostada de huevo semiduro y aguacate"></div>
+        <div class="mc-body"><h4>La combinación favorita de la chefa</h4><p>Aguacate, queso, huevo semiduro, miel y especias.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMIDA & CENA -->
+<section class="block carta-panel" id="comida-cena">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">El plato fuerte</span>
+      <h2>Comida & Cena</h2>
+    </div>
+
+    <!-- ===== DEL HUERTO ===== -->
+    <div class="subcat reveal"><h3>Del huerto</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/burrata.jpg" alt="Tomate y burrata con pesto e higos"></div>
+        <div class="mc-body"><h4>Tomate y burrata</h4><p>Con pesto e higos.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/ventresca.jpg" alt="Ensalada de tomate, aguacate y ventresca"></div>
+        <div class="mc-body"><h4>Tomate, aguacate y ventresca</h4><p>Con unos giros de muñeca y tomate mocoso.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><span class="fav-star">★</span><img src="assets/cesar.jpg" alt="Ensalada César con pollo"></div>
+        <div class="mc-body"><h4>Ensalada César</h4><p>Más que del César, de Alfredo Vozmediano.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Esgarraet</h4><p>De toda la vida.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== PRINCIPALES ===== -->
+    <div class="subcat reveal"><h3>Principales</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><span class="fav-star">★</span><img src="assets/berenjena.jpg" alt="Berenjena rellena"></div>
+        <div class="mc-body"><h4>Berenjena rellena</h4><p>De carne muy muy top.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/parmigiana.jpg" alt="Parmigiana gratinada"></div>
+        <div class="mc-body"><h4>Parmigiana</h4><p>Muy mediterránea.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/hamburguesa.jpg" alt="Hamburguesa de la casa"></div>
+        <div class="mc-body"><h4>Hamburguesa</h4><p>De carne o pollo · con o sin cebolla caramelizada.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/pollo-brasa.jpg" alt="Pollo a la brasa"></div>
+        <div class="mc-body"><h4>Pollo a la brasa</h4><p>Y a la ducha.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/pollo-horno.jpg" alt="Pollo al horno"></div>
+        <div class="mc-body"><h4>Pollo al horno</h4><p>Con verduras asadas.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/alitas.jpg" alt="Alitas de pollo"></div>
+        <div class="mc-body"><h4>Alitas</h4><p>Glaseadas.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/pechugas.jpg" alt="Pechugas a la plancha"></div>
+        <div class="mc-body"><h4>Pechugas</h4><p>A dieta.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/lomo.jpg" alt="Lomo"></div>
+        <div class="mc-body"><h4>Lomo adobado</h4><p>No como el del cole.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/guisantes.jpg" alt="Guisantes con longanizas"></div>
+        <div class="mc-body"><h4>Guisantes con longanizas</h4><p>Atente a las consecuencias.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tacos.jpg" alt="Tacos al pastor sin cilantro"></div>
+        <div class="mc-body"><h4>Tacos al pastor</h4><p>Sin cilantro, a partir de ahora.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tacos-langostinos.jpg" alt="Tacos con langostinos"></div>
+        <div class="mc-body"><h4>Tacos con langostinos</h4><p>Estos también sin cilantro, porfa.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Tacos de pollo</h4></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/arroz-cubana.jpg" alt="Arroz a la cubana con tomate y huevo frito"></div>
+        <div class="mc-body"><h4>Arroz a la cubana</h4><p>Pero no en Cuba.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/pasta.jpg" alt="Pasta boloñesa o carbonara"></div>
+        <div class="mc-body"><h4>Pasta</h4><p>Con suerte casera. Boloñesa o carbonara.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tartar-carne.jpg" alt="Tartar de carne" style="object-position:center 28%"></div>
+        <div class="mc-body"><h4><s>Tartar de carne</s></h4><span class="tag-out">Fuera de carta permanentemente</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Macarrones de lentejas</h4><p>Con tomate y atún.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Lentejas</h4><p>O las comes o no las dejas.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== NUESTRAS PEQUEÑAS ===== -->
+    <div class="subcat reveal"><h3>Nuestras Pequeñas</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><span class="fav-star">★</span><img src="assets/tortilla.jpg" alt="Tortilla de patata con cebolla"></div>
+        <div class="mc-body"><h4>Tortilla de patata</h4><p>Con cebolla.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tortilla-francesa.jpg" alt="Tortilla francesa"></div>
+        <div class="mc-body"><h4>Tortilla francesa</h4></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/revuelto-alcachofas.jpg" alt="Revuelto de alcachofas"></div>
+        <div class="mc-body"><h4>Revuelto de alcachofas</h4><p>Más brazo que en el CrossFit.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/revuelto-boletus.jpg" alt="Revuelto de boletus"></div>
+        <div class="mc-body"><h4>Revuelto de boletus</h4><p>Más paciencia que Buda.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/revuelto-esparragos.jpg" alt="Revuelto de espárragos"></div>
+        <div class="mc-body"><h4>Revuelto de espárragos</h4><p>Más rico que tú.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/huevo-semiduro.jpg" alt="Huevo semiduro"></div>
+        <div class="mc-body"><h4>Huevo semiduro</h4><p>Según quien lo cueza.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/huevo-plancha.jpg" alt="Huevo a la plancha"></div>
+        <div class="mc-body"><h4>Huevo plancha</h4></div>
+      </div>
+    </div>
+
+    <!-- ===== MAR Y PECES ===== -->
+    <div class="subcat reveal"><h3>Mar y peces</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/atun.jpg" alt="Atún"></div>
+        <div class="mc-body"><h4>Atún a la plancha</h4><p>Hu ha.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/bacalao.jpg" alt="Bacalao"></div>
+        <div class="mc-body"><h4>Bacalao al horno</h4><p>Se ha mojado mucho.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/lenguado.jpg" alt="Lenguado a la plancha"></div>
+        <div class="mc-body"><h4>Lenguado a la plancha</h4><p>Más lengua no.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/pescado-horno.jpg" alt="Rodaballo al horno"></div>
+        <div class="mc-body"><h4>Rodaballo al horno</h4><p>Feo pero rico.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/clochinas.jpg" alt="Clochinas al vapor"></div>
+        <div class="mc-body"><h4>Clochinas</h4><p>Al vapor, con limón y laurel.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/galeras.jpg" alt="Galeras a la plancha"></div>
+        <div class="mc-body"><h4>Galeras</h4><p>Marisco duro de pelar.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tellinas.jpg" alt="Tellinas"></div>
+        <div class="mc-body"><h4>Tellinas</h4><p>Cazadas por nosotros.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/tartar.jpg" alt="Tartar de salmón y aguacate"></div>
+        <div class="mc-body"><h4><s>Tartar de salmón y aguacate</s></h4><span class="tag-out">Fuera de carta permanentemente</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Salmón</h4></div>
+      </div>
+    </div>
+
+    <!-- ===== ARROCES ===== -->
+    <div class="subcat reveal"><h3>Arroces</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><span class="badge">A fuego muy lento</span><span class="fav-star">★</span><img src="assets/paella.jpg" alt="Paella valenciana"></div>
+        <div class="mc-body"><h4>Paella valenciana</h4><p>A fuego muyyyy lento.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/arroz-entrana.jpg" alt="Arroz de entraña"></div>
+        <div class="mc-body"><h4>Arroz de entraña</h4><p>Meloso, con entraña a la brasa.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/arroz-horno.jpg" alt="Arroz al horno"></div>
+        <div class="mc-body"><h4>Arroz al horno</h4><p>Con garbanzos, morcilla y patata.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== DE CUCHARA ===== -->
+    <div class="subcat reveal"><h3>De cuchara</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/salmorejo.jpg" alt="Salmorejo con huevo y jamón"></div>
+        <div class="mc-body"><h4>Salmorejo</h4><p>Con huevo duro y jamón.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/crema-calabaza.jpg" alt="Crema de calabaza con huevo frito, semillas y jamón"></div>
+        <div class="mc-body"><h4>Crema de calabaza</h4><p>Con huevo frito, semillas y jamón.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/crema-melocoton.jpg" alt="Crema de melocotón"></div>
+        <div class="mc-body"><h4>Crema de melocotón</h4><p>Suave y de temporada.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><span class="badge">★ Especialidad</span><span class="fav-star">★</span><img src="assets/caldito.jpg" alt="Caldito"></div>
+        <div class="mc-body"><h4>Caldito</h4><p>¡Tristemente, solo disponible en invierno!<br>Puede ser de fideos, lluvia, estrellas o gotas…<br>Hecho con huesos de gallina, pero no de las pequeñas.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Gazpacho</h4><p>De la huerta.</p></div>
+      </div>
+    </div>
+
+    <!-- ===== MASAS Y COCAS ===== -->
+    <div class="subcat reveal"><h3>Masas y cocas</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/pizza.jpg" alt="Pizza casera"></div>
+        <div class="mc-body"><h4>Pizza casera</h4><p>Solicitar con mínimo 24 h de antelación.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><span class="fav-star">★</span><img src="assets/coca-verduras.jpg" alt="Coca de verduras y queso de cabra"></div>
+        <div class="mc-body"><h4>Coca de verduras y queso de cabra</h4><p>Sin dedo.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/empanada-pisto.jpg" alt="Empanada de pisto"></div>
+        <div class="mc-body"><h4>Empanada de pisto</h4><p>Más empanado no porfa.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/empanadillas.jpg" alt="Empanadillas"></div>
+        <div class="mc-body"><h4>Empanadillas</h4><p>Mejor que las de Masanet.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/cocas-guisantes.jpg" alt="Cocas de guisantes y pisto"></div>
+        <div class="mc-body"><h4>Cocas</h4><p>De guisantes, pisto…</p></div>
+      </div>
+    </div>
+
+    <!-- ===== ACOMPAÑAMIENTO ===== -->
+    <div class="subcat reveal" id="acompanamientos"><h3>Acompañamiento</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/patatas-horno.jpg" alt="Patatas al horno con huevo y jamón"></div>
+        <div class="mc-body"><h4>Patatas al horno</h4><p>Con huevo y jamón.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/patatas-asadas.jpg" alt="Patatas asadas"></div>
+        <div class="mc-body"><h4>Patatas asadas</h4></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/anchoas.jpg" alt="Anchoas"></div>
+        <div class="mc-body"><h4>Anchoas</h4><p>Destripadas por el chef.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Boniato al horno</h4></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Zanahoria al horno</h4></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media"><img src="assets/pimientos.jpg" alt="Pimientos asados"></div>
+        <div class="mc-body"><h4>Pimientos asados</h4></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Cebolla al horno</h4></div>
+      </div>
+    </div>
+
+    <!-- ===== POSTRES ===== -->
+    <div class="subcat reveal" id="postres"><h3>Postres</h3></div>
+    <div class="menu-grid reveal">
+      <div class="menu-card">
+        <div class="mc-body"><h4>Yogur de cabra</h4><p>Natural o de coco.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-body"><h4>Fruta de temporada</h4><p>La que esté en su mejor momento.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-body"><h4>Chocolate</h4><p>El mejor del mundo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEÑAS -->
+<section class="block resenas" id="resenas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Lo que dicen de nosotros</span>
+      <h2>Reseñas (muy) honestas</h2>
+      <p>No nos inventamos nada. Palabra de comensal.</p>
+    </div>
+    <div class="resena-grid">
+      <div class="resena reveal" data-delay="1">
+        <div class="stars">★★★☆☆</div>
+        <p>«He tragado agua del mar menos salada que esta crema. Pero el camarero, un cielo.»</p>
+        <div class="who"><div class="avatar">F</div><div><b>Fiona</b><small>Comensal</small></div></div>
+      </div>
+      <div class="resena reveal" data-delay="2">
+        <div class="stars">★★★★★</div>
+        <p>«Lo mejor, el caldito. Esto sí que es oro líquido. Una pena que solo lo saquen en invierno "pirqui hici calir", según el cocinero. Ese hombre no tiene ni idea.»</p>
+        <div class="who"><div class="avatar">C</div><div><b>Charo</b><small>Comensal</small></div></div>
+      </div>
+      <div class="resena reveal" data-delay="3">
+        <div class="stars">★★★★☆</div>
+        <p>«Gambas espectaculares. Mejor si las tuvieran ya peladas. Ahora tengo artrosis en los pulgares.»</p>
+        <div class="who"><div class="avatar">G</div><div><b>Gorgonzola</b><small>Comensal</small></div></div>
+      </div>
+      <div class="resena reveal" data-delay="1">
+        <div class="stars">★★★★☆</div>
+        <p>«Las tostadas, increíbles, mejores que en cualquier cafetería. Lo único: la de mi compañero tenía mejor pinta que la mía… y no me la quiso cambiar. Aún no lo supero.»</p>
+        <div class="who"><div class="avatar">M</div><div><b>Mapi</b><small>Comensal</small></div></div>
+      </div>
+      <div class="resena reveal" data-delay="2">
+        <div class="stars">★★★★★</div>
+        <p>«La mejor berenjena rellena de mi VIDA, y he vivido. Solo dos peros: el aire acondicionado a tope y el básket de fondo.»</p>
+        <div class="who"><div class="avatar">K</div><div><b>Kinder</b><small>Comensal</small></div></div>
+      </div>
+      <div class="resena reveal" data-delay="3">
+        <div class="stars">★★★★★</div>
+        <p>«Me encontré un pelo en la hamburguesa. Pero bueno, será de la vaca.»</p>
+        <div class="who"><div class="avatar">L</div><div><b>La Roca</b><small>Comensal</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="block" id="contacto">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Te esperamos</span>
+      <h2>Dónde estamos</h2>
+    </div>
+    <div class="contacto-grid">
+      <div class="reveal left">
+        <div class="info-card">
+          <div class="ic">📍</div>
+          <div><h4>Dirección</h4><p>C/ Reina Doña Germana 16, 8</p></div>
+        </div>
+        <div class="info-card">
+          <div class="ic">🕑</div>
+          <div><h4>Horario</h4><p>Abierto todo el día… menos cuando estoy de viaje o comiendo en la ofi.</p></div>
+        </div>
+        <div class="info-card">
+          <div class="ic">📞</div>
+          <div><h4>Reservas</h4><p><a href="tel:+34651413489">+34 651 41 34 89</a></p></div>
+        </div>
+        <div class="info-card">
+          <div class="ic">✉️</div>
+          <div><h4>Email</h4><p><a href="mailto:bortisimo@casajavi.mmm">bortisimo@casajavi.mmm</a></p></div>
+        </div>
+      </div>
+      <div class="map-box reveal right">
+        <iframe
+          title="Mapa Bortísimo"
+          src="https://www.google.com/maps?q=Calle%20Reina%20Do%C3%B1a%20Germana%2016%20Valencia&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMANDA POR WHATSAPP -->
+<div class="order-overlay" id="orderOverlay"></div>
+<aside class="order-panel" id="orderPanel" aria-label="Tu comanda">
+  <div class="op-head">
+    <h3>Tu comanda</h3>
+    <button class="op-close" id="opClose" aria-label="Cerrar">×</button>
+  </div>
+  <p class="op-sub">Toca el “+” de los platos que quieras y envíale la comanda al chef.</p>
+  <div class="op-items" id="opItems"></div>
+  <div class="op-fields">
+    <label>¿Para qué hora?<input type="time" id="opTime"></label>
+    <label>¿Cuántos comensales?<input type="number" min="1" value="2" id="opGuests"></label>
+  </div>
+  <button class="op-send" id="opSend">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.821 9.821 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    Enviar por WhatsApp
+  </button>
+</aside>
+<button class="wa-btn" id="waBtn" aria-label="Enviar comanda por WhatsApp" title="Tu comanda">
+  <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.821 9.821 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  <span class="wa-count" id="waCount">0</span>
+</button>
+
+<!-- MÚSICA DE FONDO -->
+<audio id="bgMusic" src="assets/musica.mp3.mp3" loop preload="auto"></audio>
+<button class="music-btn" id="musicBtn" aria-label="Música de fondo" title="Música de fondo">🔈</button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">Bort<span>í</span>simo</div>
+  <div class="f-slogan">«Comiendo como en casa»</div>
+  <div class="f-links">
+    <a href="#historia">Casa Bort</a>
+    <a href="#carta">Carta</a>
+    <a href="#resenas">Reseñas</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <p class="copy">C/ Reina Doña Germana 16, 8 · © 2026 Bortísimo. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  // NAV scrolled
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Menú móvil
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    toggle.classList.remove('open');
+    links.classList.remove('open');
+  }));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Selector de carta (Desayunos / Comida & Cena)
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.carta-panel');
+  tabBtns.forEach(btn => btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    tabBtns.forEach(b => b.classList.toggle('active', b === btn));
+    panels.forEach(p => {
+      const on = p.id === target;
+      p.classList.toggle('active', on);
+      if (on) p.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    });
+  }));
+
+  // Mini galerías deslizables dentro de tarjetas
+  document.querySelectorAll('[data-gallery]').forEach(gal => {
+    const imgs = gal.querySelectorAll('.g-img');
+    const dots = gal.querySelectorAll('.g-dot');
+    let i = 0;
+    const show = n => {
+      i = (n + imgs.length) % imgs.length;
+      imgs.forEach((im,k) => im.classList.toggle('active', k === i));
+      dots.forEach((d,k) => d.classList.toggle('active', k === i));
+    };
+    const next = gal.querySelector('.g-next');
+    const prev = gal.querySelector('.g-prev');
+    if (next) next.addEventListener('click', e => { e.stopPropagation(); show(i+1); });
+    if (prev) prev.addEventListener('click', e => { e.stopPropagation(); show(i-1); });
+    dots.forEach((d,k) => d.addEventListener('click', e => { e.stopPropagation(); show(k); }));
+  });
+
+  // Comanda por WhatsApp
+  const WA_PHONE = "34651413489";
+  const selected = new Map();
+  const waBtn = document.getElementById('waBtn');
+  const waCount = document.getElementById('waCount');
+  const orderPanel = document.getElementById('orderPanel');
+  const orderOverlay = document.getElementById('orderOverlay');
+  const opItems = document.getElementById('opItems');
+  const opClose = document.getElementById('opClose');
+  const opSend = document.getElementById('opSend');
+  const opTime = document.getElementById('opTime');
+  const opGuests = document.getElementById('opGuests');
+
+  function cardName(card){ const t = card.querySelector('.mc-body h4, .mc-body h3'); return t ? t.textContent.trim() : ''; }
+
+  // Inyecta el botón + en cada plato seleccionable
+  document.querySelectorAll('.menu-card').forEach(card => {
+    if (card.querySelector('.tag-out')) return;      // fuera de carta: no seleccionable
+    const body = card.querySelector('.mc-body');
+    const name = cardName(card);
+    if (!body || !name) return;
+    const btn = document.createElement('button');
+    btn.className = 'add-btn'; btn.type = 'button'; btn.textContent = '+';
+    btn.setAttribute('aria-label', 'Añadir ' + name + ' a la comanda');
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      if (selected.has(name)) { selected.delete(name); card.classList.remove('selected'); btn.textContent = '+'; }
+      else { selected.set(name, true); card.classList.add('selected'); btn.textContent = '✓'; }
+      refreshOrder();
+    });
+    body.appendChild(btn);
+  });
+
+  function unselectByName(name){
+    document.querySelectorAll('.menu-card.selected').forEach(c => {
+      if (cardName(c) === name) { c.classList.remove('selected'); const b = c.querySelector('.add-btn'); if (b) b.textContent = '+'; }
+    });
+  }
+
+  function refreshOrder(){
+    const n = selected.size;
+    if (waCount){ waCount.textContent = n; waCount.style.display = n ? 'grid' : 'none'; }
+    if (!opItems) return;
+    if (!n){ opItems.innerHTML = '<p class="op-empty">Aún no has elegido nada… ¡pero ya tenemos hambre! 😋</p>'; return; }
+    opItems.innerHTML = '';
+    selected.forEach((v, name) => {
+      const row = document.createElement('div'); row.className = 'op-item';
+      const span = document.createElement('span'); span.textContent = name;
+      const rm = document.createElement('button'); rm.className = 'op-rm'; rm.textContent = '×'; rm.setAttribute('aria-label','Quitar');
+      rm.addEventListener('click', () => { selected.delete(name); unselectByName(name); refreshOrder(); });
+      row.appendChild(span); row.appendChild(rm); opItems.appendChild(row);
+    });
+  }
+
+  function openPanel(){ orderPanel.classList.add('open'); orderOverlay.classList.add('open'); }
+  function closePanel(){ orderPanel.classList.remove('open'); orderOverlay.classList.remove('open'); }
+  if (waBtn) waBtn.addEventListener('click', openPanel);
+  if (opClose) opClose.addEventListener('click', closePanel);
+  if (orderOverlay) orderOverlay.addEventListener('click', closePanel);
+
+  function buildMessage(){
+    const items = [...selected.keys()];
+    const guests = opGuests ? opGuests.value : '';
+    const time = opTime ? opTime.value : '';
+    let msg = "¡Hola, Chef! 👨‍🍳✨\n\nAquí va la comanda de hoy desde Casa Bort 🏡🍽️:\n\n";
+    if (items.length) items.forEach(i => msg += "🍽️ " + i + "\n");
+    else msg += "🤔 Todavía no he elegido nada, ¡pero la tripa ya ruge!\n";
+    msg += "\n";
+    if (guests) msg += "👥 Seremos " + guests + " comensales.\n";
+    if (time) msg += "🕒 La querríamos lista para las " + time + " h.\n";
+    msg += "\n¡Mil gracias y que no falten las risas, las sonrisas y el buen comer! 😄🍷🥘";
+    return msg;
+  }
+
+  if (opSend) opSend.addEventListener('click', () => {
+    const url = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(buildMessage());
+    window.open(url, "_blank");
+  });
+
+  refreshOrder();
+
+  // Música de fondo
+  const music = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicBtn');
+  let musicOn = false;
+  function setMusic(on){
+    musicOn = on;
+    if(on){ music.play().catch(()=>{}); musicBtn.textContent='🔊'; musicBtn.classList.add('playing'); }
+    else { music.pause(); musicBtn.textContent='🔈'; musicBtn.classList.remove('playing'); }
+  }
+  if(musicBtn){
+    musicBtn.addEventListener('click', (e)=>{ e.stopPropagation(); setMusic(!musicOn); });
+    // arranca con la primera interacción del usuario (los navegadores bloquean el autoplay)
+    window.addEventListener('click', function startOnce(){ if(!musicOn) setMusic(true); }, {once:true});
+  }
+
+  // Parallax suave en las burbujas del hero
+  const d1 = document.querySelector('.hero-deco.d1');
+  const d2 = document.querySelector('.hero-deco.d2');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking){
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (y < window.innerHeight){
+          if (d1) d1.style.transform = `translateY(${y*0.25}px)`;
+          if (d2) d2.style.transform = `translateY(${y*-0.18}px)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive:true});
+</script>
+</body>
+</html>
