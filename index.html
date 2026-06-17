@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bortísimo · Comiendo como en casa</title>
 <meta name="description" content="Bortísimo — Comiendo como en casa. Restaurante en C/ Reina Doña Germana 16, 8. Desayunos, comidas y cenas con producto de verdad.">
+<!-- Vista previa al compartir (WhatsApp, redes) -->
+<meta property="og:title" content="Bortísimo · Comiendo como en casa">
+<meta property="og:description" content="El restaurante de Casa Bort: desayunos, comidas y cenas con producto de verdad. ¡Comiendo como en casa!">
+<meta property="og:image" content="https://j-bortserrat.github.io/plan-b/assets/chef.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://j-bortserrat.github.io/plan-b/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://j-bortserrat.github.io/plan-b/assets/chef.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -157,6 +165,9 @@
   .historia-foto .cap-hover{opacity:0}
   .historia-foto:hover .cap-default{opacity:0}
   .historia-foto:hover .cap-hover{opacity:1}
+  .historia-foto.show-hover .hover-img{opacity:1}
+  .historia-foto.show-hover .cap-default{opacity:0}
+  .historia-foto.show-hover .cap-hover{opacity:1}
   .historia-txt h2{font-size:clamp(2rem,4.5vw,3rem);color:var(--granate);margin-bottom:22px;line-height:1.1}
   .historia-txt p{color:var(--tinta-suave);font-size:1.12rem;margin-bottom:18px}
   .historia-txt .firma{font-family:'Playfair Display',serif;font-style:italic;color:var(--granate);font-size:1.3rem;margin-top:6px}
@@ -386,6 +397,12 @@
   .op-send{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;border:0;border-radius:50px;padding:15px;font-weight:800;font-size:1rem;cursor:pointer;transition:.25s;box-shadow:0 10px 24px rgba(37,211,102,.35)}
   .op-send:hover{background:#1ebe5a;transform:translateY(-2px)}
   .op-send svg{width:22px;height:22px;fill:#fff}
+  .svc-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:14px;padding:18px;font-weight:800;font-size:1.08rem;cursor:pointer;margin-bottom:14px;transition:.25s;color:#fff}
+  .svc-btn.chef{background:var(--granate)}
+  .svc-btn.chef:hover{background:var(--granate-claro);transform:translateY(-2px)}
+  .svc-btn.valet{background:#e0a423}
+  .svc-btn.valet:hover{background:#caa53e;transform:translateY(-2px)}
+  .op-back{background:none;border:0;color:var(--granate-claro);font-weight:700;font-size:.9rem;cursor:pointer;margin-bottom:10px;align-self:flex-start;padding:0}
 
   /* ---------- RESPONSIVE ---------- */
   @media(max-width:860px){
@@ -639,7 +656,7 @@
         <div class="mc-body"><h4>Tacos con langostinos</h4><p>Estos también sin cilantro, porfa.</p></div>
       </div>
       <div class="menu-card">
-        <div class="mc-media placeholder"></div>
+        <div class="mc-media"><img src="assets/tacos-pollo.jpg" alt="Tacos de pollo"></div>
         <div class="mc-body"><h4>Tacos de pollo</h4></div>
       </div>
       <div class="menu-card">
@@ -661,6 +678,10 @@
       <div class="menu-card">
         <div class="mc-media placeholder"></div>
         <div class="mc-body"><h4>Lentejas</h4><p>O las comes o no las dejas.</p></div>
+      </div>
+      <div class="menu-card">
+        <div class="mc-media placeholder"></div>
+        <div class="mc-body"><h4>Cocido</h4></div>
       </div>
     </div>
 
@@ -922,6 +943,10 @@
           <div class="ic">✉️</div>
           <div><h4>Email</h4><p><a href="mailto:bortisimo@casajavi.mmm">bortisimo@casajavi.mmm</a></p></div>
         </div>
+        <div class="info-card">
+          <div class="ic">🚕</div>
+          <div><h4>Aparcamiento</h4><p>Avisa cuando estés llegando y el chef se convierte en aparcacoches.</p></div>
+        </div>
       </div>
       <div class="map-box reveal right">
         <iframe
@@ -935,11 +960,22 @@
 
 <!-- COMANDA POR WHATSAPP -->
 <div class="order-overlay" id="orderOverlay"></div>
-<aside class="order-panel" id="orderPanel" aria-label="Tu comanda">
+<aside class="order-panel" id="orderPanel" aria-label="Reservas">
   <div class="op-head">
-    <h3>Tu comanda</h3>
+    <h3 id="opTitle">¿Qué necesitas?</h3>
     <button class="op-close" id="opClose" aria-label="Cerrar">×</button>
   </div>
+
+  <!-- Paso 1: elegir servicio -->
+  <div class="op-service" id="opService">
+    <p class="op-sub">¿Qué servicio quieres contratar?</p>
+    <button class="svc-btn valet" id="svcValet">🚕 Aparcacoches</button>
+    <button class="svc-btn chef" id="svcChef">🍳 Chef (hacer comanda)</button>
+  </div>
+
+  <!-- Paso 2: comanda del chef -->
+  <div class="op-order" id="opOrder" style="display:none;flex:1;flex-direction:column;min-height:0">
+  <button class="op-back" id="opBack">‹ Cambiar de servicio</button>
   <p class="op-sub">Toca el “+” de los platos que quieras y envíale la comanda al chef.</p>
   <div class="op-items" id="opItems"></div>
   <div class="op-fields">
@@ -950,6 +986,7 @@
     <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.821 9.821 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
     Enviar por WhatsApp
   </button>
+  </div>
 </aside>
 <button class="wa-btn" id="waBtn" aria-label="Enviar comanda por WhatsApp" title="Tu comanda">
   <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.821 9.821 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -1030,6 +1067,21 @@
     dots.forEach((d,k) => d.addEventListener('click', e => { e.stopPropagation(); show(k); }));
   });
 
+  // La catadora se asoma 3 segundos al entrar la sección
+  const historiaFoto = document.querySelector('.historia-foto');
+  if (historiaFoto){
+    const peek = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          historiaFoto.classList.add('show-hover');
+          setTimeout(()=> historiaFoto.classList.remove('show-hover'), 3000);
+          peek.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.5});
+    peek.observe(historiaFoto);
+  }
+
   // Comanda por WhatsApp
   const WA_PHONE = "34651413489";
   const selected = new Map();
@@ -1084,17 +1136,33 @@
     });
   }
 
-  function openPanel(){ orderPanel.classList.add('open'); orderOverlay.classList.add('open'); }
+  const opService = document.getElementById('opService');
+  const opOrder = document.getElementById('opOrder');
+  const opTitle = document.getElementById('opTitle');
+  const svcValet = document.getElementById('svcValet');
+  const svcChef = document.getElementById('svcChef');
+  const opBack = document.getElementById('opBack');
+
+  function showService(){ if(opService) opService.style.display='block'; if(opOrder) opOrder.style.display='none'; if(opTitle) opTitle.textContent='¿Qué necesitas?'; }
+  function showOrder(){ if(opService) opService.style.display='none'; if(opOrder) opOrder.style.display='flex'; if(opTitle) opTitle.textContent='Tu comanda'; refreshOrder(); }
+  function openPanel(){ showService(); orderPanel.classList.add('open'); orderOverlay.classList.add('open'); }
   function closePanel(){ orderPanel.classList.remove('open'); orderOverlay.classList.remove('open'); }
   if (waBtn) waBtn.addEventListener('click', openPanel);
   if (opClose) opClose.addEventListener('click', closePanel);
   if (orderOverlay) orderOverlay.addEventListener('click', closePanel);
+  if (svcChef) svcChef.addEventListener('click', showOrder);
+  if (opBack) opBack.addEventListener('click', showService);
+  if (svcValet) svcValet.addEventListener('click', () => {
+    const msg = "¡Hola, Chef! 🚕✨\n\nQuiero contratar el servicio de APARCACOCHES.\nYa estoy llegando… ¡ve calentando motores y poniéndote la gorra! 😎🚗\n\n¡Gracias!";
+    window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(msg), "_blank");
+    closePanel();
+  });
 
   function buildMessage(){
     const items = [...selected.keys()];
     const guests = opGuests ? opGuests.value : '';
     const time = opTime ? opTime.value : '';
-    let msg = "¡Hola, Chef! 👨‍🍳✨\n\nAquí va la comanda de hoy desde Casa Bort 🏡🍽️:\n\n";
+    let msg = "¡Hola, Chef! 👨‍🍳✨\n\nQuiero contratar el servicio de CHEF 🍳.\nAquí va la comanda de hoy desde Casa Bort 🏡🍽️:\n\n";
     if (items.length) items.forEach(i => msg += "🍽️ " + i + "\n");
     else msg += "🤔 Todavía no he elegido nada, ¡pero la tripa ya ruge!\n";
     msg += "\n";
